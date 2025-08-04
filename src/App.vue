@@ -2,62 +2,86 @@
 <template>
   <div class="min-h-screen bg-black text-white font-sans">
     <!-- 封面区域 -->
-    <div
-      class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-green-900"
-    >
+    <div class="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
-        class="absolute inset-0 bg-cover bg-center opacity-30"
+        class="absolute inset-0 bg-cover bg-center"
         :style="{
           backgroundImage:
-            'url(https://readdy.ai/api/search-image?query=abstract%20digital%20technology%20background%20with%20flowing%20green%20light%20particles%20and%20geometric%20patterns%20creating%20a%20futuristic%20atmosphere%20perfect%20for%20AIGC%20design%20portfolio%20showcase%20with%20dark%20gradient%20overlay&width=1440&height=1024&seq=portfolio-bg-001&orientation=landscape)',
+            'url(https://readdy.ai/api/search-image?query=dark%20futuristic%20technology%20background%20with%20flowing%20green%20neon%20light%20particles%20geometric%20wireframe%20patterns%20digital%20circuit%20lines%20and%20abstract%20cyber%20elements%20creating%20sophisticated%20modern%20atmosphere%20for%20AIGC%20designer%20portfolio&width=1440&height=1024&seq=portfolio-hero-001&orientation=landscape)',
         }"
       ></div>
-      <div class="relative z-10 text-center max-w-4xl mx-auto px-8">
-        <h1 class="text-8xl font-bold mb-8 tracking-wider">
-          <span class="text-white">Port</span><span class="text-green-400">folio</span>
+      <div class="absolute inset-0 bg-black bg-opacity-50"></div>
+      <div class="relative z-10 text-center max-w-6xl mx-auto px-8">
+        <div class="mb-6">
+          <span class="text-sm uppercase tracking-[0.3em] text-green-400 font-light opacity-80"
+            >AIGC DESIGNER PORTFOLIO</span
+          >
+        </div>
+        <h1 class="text-7xl md:text-8xl font-bold mb-8 leading-tight">
+          <div class="mb-4">Creative Vision</div>
+          <div class="text-green-400 relative">
+            <span class="absolute inset-0 blur-lg bg-green-400 opacity-50"></span>
+            <span class="relative">Meets Technology</span>
+          </div>
         </h1>
-        <div
-          class="bg-black bg-opacity-60 backdrop-blur-sm rounded-2xl p-12 border border-green-400 border-opacity-30"
-        >
-          <h2 class="text-4xl font-bold mb-4 text-green-400">朱锐 Zero</h2>
-          <p class="text-2xl mb-6 text-gray-300">AIGC 特效设计师 / AIGC 效果产品经理</p>
-          <div class="flex justify-center items-center mb-8">
-            <div class="bg-green-400 text-black px-4 py-2 rounded-full text-lg font-bold">
-              MBTI: ENTJ
+        <div class="mb-12">
+          <p class="text-xl text-gray-300 mb-2 font-light">
+            Zhu Rui - AIGC Effects Designer & Product Manager
+          </p>
+          <p class="text-lg text-gray-400 font-light"></p>
+        </div>
+        <div class="flex justify-center gap-6 mb-16">
+          <button
+            class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-8 py-4 font-semibold text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
+          >
+            AIGC 特效落地
+          </button>
+          <button
+            class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-8 py-4 font-semibold text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
+          >
+            潮流风格创造
+          </button>
+          <button
+            class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-8 py-4 font-semibold text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
+          >
+            产品化与工程化思维
+          </button>
+        </div>
+        <div class="flex items-center justify-center gap-12">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center">
+              <i class="fas fa-brain text-black text-lg"></i>
             </div>
+            <span class="text-gray-300">ENTJ</span>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <div class="flex items-center justify-center">
-              <i class="fas fa-phone text-green-400 mr-3 text-xl"></i>
-              <span class="text-lg">18784308516</span>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center">
+              <i class="fas fa-phone text-black text-lg"></i>
             </div>
-            <div class="flex items-center justify-center">
-              <i class="fab fa-weixin text-green-400 mr-3 text-xl"></i>
-              <span class="text-lg">Aprilmay_sue</span>
-            </div>
+            <span class="text-gray-300">18784308516</span>
           </div>
-          <div class="space-y-4">
-            <h3 class="text-xl font-semibold text-green-400 mb-4">个人能力标签</h3>
-            <div class="flex flex-wrap justify-center gap-4">
-              <div
-                class="bg-gradient-to-r from-green-400 to-green-600 text-black px-6 py-3 rounded-full font-semibold cursor-pointer hover:scale-105 transition-transform !rounded-button whitespace-nowrap"
-              >
-                AIGC 特效落地
-              </div>
-              <div
-                class="bg-gradient-to-r from-green-400 to-green-600 text-black px-6 py-3 rounded-full font-semibold cursor-pointer hover:scale-105 transition-transform !rounded-button whitespace-nowrap"
-              >
-                潮流风格创造
-              </div>
-              <div
-                class="bg-gradient-to-r from-green-400 to-green-600 text-black px-6 py-3 rounded-full font-semibold cursor-pointer hover:scale-105 transition-transform !rounded-button whitespace-nowrap"
-              >
-                产品化与工程化思维
-              </div>
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full bg-green-400 flex items-center justify-center">
+              <i class="fab fa-weixin text-black text-lg"></i>
             </div>
+            <span class="text-gray-300">Aprilmay_sue</span>
           </div>
         </div>
       </div>
+      <!-- 浮动元素 -->
+      <div
+        class="absolute top-20 left-20 w-20 h-20 border border-green-400 border-opacity-30 rotate-45 animate-pulse"
+      ></div>
+      <div
+        class="absolute top-40 right-32 w-16 h-16 bg-green-400 bg-opacity-20 rounded-full animate-bounce"
+      ></div>
+      <div
+        class="absolute bottom-32 left-40 w-12 h-12 border-2 border-green-500 rotate-12 animate-spin"
+        style="animation-duration: 8s"
+      ></div>
+      <div
+        class="absolute bottom-20 right-20 w-24 h-1 bg-gradient-to-r from-green-400 to-transparent"
+      ></div>
     </div>
     <!-- 项目展示区域 -->
     <div class="py-20 px-8">
@@ -73,7 +97,7 @@
         <!-- 项目1 -->
         <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20">
           <h3 class="text-4xl font-bold mb-8 text-center">
-            <span class="text-green-400">项目 2：</span>人物转绘工作流设计
+            <span class="text-green-400">项目 1：</span>人物转绘工作流设计
           </h3>
           <div class="mb-12">
             <h4 class="text-2xl font-semibold mb-6 text-green-400">
@@ -106,12 +130,12 @@
                 <h5 class="text-xl font-semibold mb-4 text-green-400">工作流节点展示</h5>
                 <div class="aspect-video overflow-hidden rounded-xl">
                   <img
-                    src="https://pic1.imgdb.cn/item/688f287358cb8da5c8006bc6.png"
+                    src="https://i.mji.rip/2025/08/04/03b5b29d6495c97a072fabab9ee5763d.png"
                     alt="ComfyUI节点图"
                     class="w-full h-full object-cover cursor-pointer"
                     @click="
                       openImageModal({
-                        url: 'https://pic1.imgdb.cn/item/688f287358cb8da5c8006bc6.png',
+                        url: 'https://i.mji.rip/2025/08/04/03b5b29d6495c97a072fabab9ee5763d.png',
                         alt: 'ComfyUI节点图',
                       })
                     "
@@ -450,19 +474,19 @@
             <p class="text-2xl text-gray-300 leading-relaxed">期待与您探讨更多 AIGC 设计的可能性</p>
           </div>
           <div class="space-y-8 mb-12">
-            <div class="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12">
+            <div class="flex items-center justify-center gap-8">
+              <div class="flex items-center">
+                <i class="fas fa-phone text-green-400 mr-4 text-2xl"></i>
+                <span class="text-xl text-gray-300">18784308516</span>
+              </div>
               <div class="flex items-center">
                 <i class="fas fa-envelope text-green-400 mr-4 text-2xl"></i>
-                <span class="text-xl text-gray-300">联系邮箱：zero@example.com</span>
+                <span class="text-xl text-gray-300">1010829601@qq.com</span>
               </div>
               <div class="flex items-center">
-                <i class="fab fa-linkedin text-green-400 mr-4 text-2xl"></i>
-                <span class="text-xl text-gray-300">LinkedIn：朱锐 Zero</span>
+                <i class="fas fa-location-dot text-green-400 mr-4 text-2xl"></i>
+                <span class="text-xl text-gray-300">Base in 深圳</span>
               </div>
-            </div>
-            <div class="flex items-center justify-center">
-              <i class="fas fa-location-dot text-green-400 mr-4 text-2xl"></i>
-              <span class="text-xl text-gray-300">Base in 深圳</span>
             </div>
           </div>
           <div class="border-t border-green-400 border-opacity-30 pt-8">
@@ -496,18 +520,21 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
   import { ref } from 'vue';
-
+  interface PosterImage {
+    url: string;
+    alt: string;
+  }
   const showModal = ref(false);
-  const selectedImage = ref(null);
-  const koreanStyleImages = [
+  const selectedImage = ref<PosterImage | null>(null);
+  const koreanStyleImages: PosterImage[] = [
     { url: 'https://img.cdn1.vip/i/688e267929ebf_1754146425.jpeg', alt: '韩风1' },
     { url: 'https://img.cdn1.vip/i/688e266d22c81_1754146413.jpeg', alt: '韩风2' },
     { url: 'https://img.cdn1.vip/i/688e266f044ec_1754146415.jpeg', alt: '韩风3' },
     { url: 'https://img.cdn1.vip/i/688e266e5adb2_1754146414.jpeg', alt: '韩风4' },
   ];
-  const posterImages = [
+  const posterImages: PosterImage[] = [
     {
       url: 'https://static.readdy.ai/image/b1272b1ab6637be948241a67e27cd463/2372dc00ce8fcbf9482134a699f3117b.png',
       alt: '创意海报1',
@@ -581,7 +608,7 @@
       alt: '创意海报22',
     },
   ];
-  const openImageModal = (image) => {
+  const openImageModal = (image: PosterImage) => {
     selectedImage.value = image;
     showModal.value = true;
   };
@@ -606,5 +633,40 @@
   }
   body {
     min-height: 1024px;
+  }
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-25px);
+    }
+  }
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  .animate-bounce {
+    animation: bounce 2s infinite;
+  }
+  .animate-spin {
+    animation: spin 1s linear infinite;
+  }
+  .animate-pulse {
+    animation: pulse 2s infinite;
   }
 </style>
