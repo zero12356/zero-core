@@ -1,6 +1,6 @@
 <!-- The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work. -->
 <template>
-  <div class="min-h-screen bg-black text-white font-sans">
+  <div id="container" class="min-h-screen bg-black text-white font-sans">
     <!-- 封面区域 -->
     <div class="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
@@ -128,7 +128,7 @@
                 class="bg-black bg-opacity-50 rounded-2xl p-8 border border-green-400 border-opacity-20"
               >
                 <h5 class="text-xl font-semibold mb-4 text-green-400">工作流节点展示</h5>
-                <div class="aspect-video overflow-hidden rounded-xl">
+                <div class="overflow-hidden rounded-xl">
                   <img
                     src="https://i.mji.rip/2025/08/04/03b5b29d6495c97a072fabab9ee5763d.png"
                     alt="ComfyUI节点图"
@@ -154,7 +154,7 @@
                     <div
                       v-for="(img, index) in koreanStyleImages"
                       :key="index"
-                      class="aspect-square overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
+                      class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
                     >
                       <img
                         :src="img.url"
@@ -207,7 +207,7 @@
                 <div
                   v-for="(poster, index) in posterImages"
                   :key="index"
-                  class="aspect-square overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
+                  class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
                   @click="openImageModal(poster)"
                 >
                   <img
@@ -224,7 +224,7 @@
                 class="bg-black bg-opacity-50 rounded-2xl p-8 border border-green-400 border-opacity-20"
               >
                 <h5 class="text-xl font-semibold mb-4 text-green-400">工作流节点展示</h5>
-                <div class="aspect-video overflow-hidden rounded-xl">
+                <div class="overflow-hidden rounded-xl">
                   <img
                     src="https://img.cdn1.vip/i/688e1acac98e0_1754143434.jpeg"
                     alt="工作流节点截图"
@@ -619,6 +619,8 @@
 </script>
 
 <style scoped>
+  #container {
+  }
   .font-sans {
     font-family:
       'Inter',
