@@ -1,6 +1,6 @@
 <!-- The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work. -->
 <template>
-  <div id="container" class="min-h-screen bg-black text-white font-sans">
+  <div class="min-h-screen bg-black text-white font-sans">
     <!-- 封面区域 -->
     <div class="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
@@ -19,10 +19,7 @@
         </div>
         <h1 class="text-7xl md:text-8xl font-bold mb-8 leading-tight">
           <div class="mb-4">Creative Vision</div>
-          <div class="text-green-400 relative">
-            <span class="absolute inset-0 blur-lg bg-green-400 opacity-50"></span>
-            <span class="relative">Meets Technology</span>
-          </div>
+          <div class="text-green-400">Meets Technology</div>
         </h1>
         <div class="mb-12">
           <p class="text-xl text-gray-300 mb-2 font-light">
@@ -170,7 +167,7 @@
                   <h6 class="text-lg font-medium text-green-400">波普卡通风格</h6>
                   <div class="flex justify-center">
                     <div
-                      class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
+                      class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
                     >
                       <img
                         src="https://img.cdn1.vip/i/688e25cfae5cd_1754146255.jpeg"
@@ -619,8 +616,6 @@
 </script>
 
 <style scoped>
-  #container {
-  }
   .font-sans {
     font-family:
       'Inter',
