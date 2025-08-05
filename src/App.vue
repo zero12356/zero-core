@@ -27,19 +27,19 @@
           </p>
           <p class="text-lg text-gray-400 font-light"></p>
         </div>
-        <div class="flex justify-center gap-6 mb-16">
+        <div class="flex justify-center gap-4 mb-16">
           <button
-            class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-8 py-4 font-semibold text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
+            class="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-6 py-2.5 font-medium text-sm transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
           >
             AIGC 特效落地
           </button>
           <button
-            class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-8 py-4 font-semibold text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
+            class="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-6 py-2.5 font-medium text-sm transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
           >
             潮流风格创造
           </button>
           <button
-            class="border-2 border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-8 py-4 font-semibold text-lg transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
+            class="border border-green-400 text-green-400 hover:bg-green-400 hover:text-black px-6 py-2.5 font-medium text-sm transition-all duration-300 transform hover:scale-105 cursor-pointer !rounded-button whitespace-nowrap"
           >
             产品化与工程化思维
           </button>
@@ -442,6 +442,171 @@
                   <h5 class="text-lg font-semibold text-green-400 mb-2">蓝牙音箱</h5>
                   <p class="text-gray-300">防水，重低音，便携，可当作充电宝使用。</p>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 项目4 -->
+        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20">
+          <h3 class="text-4xl font-bold mb-8 text-center">
+            <span class="text-green-400">项目 4：</span>soundcore视频转绘
+          </h3>
+          <div class="mb-12">
+            <h4 class="text-2xl font-semibold mb-6 text-green-400">
+              动态视觉探索：为soundcore新品打造多风格AI转绘视频
+            </h4>
+            
+            <!-- 风格展示区域 -->
+            <div class="space-y-16 mb-12">
+              <!-- 紫色配色：现代扁平插画风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">紫色配色：现代扁平插画风</h5>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e51dd5fe0f_1754157533.jpeg" alt="紫色风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51dd5fe0f_1754157533.jpeg', alt: '紫色风格定调'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e52110cf69_1754157585.jpeg" alt="紫色分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e52110cf69_1754157585.jpeg', alt: '紫色分镜1'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e51fceb24e_1754157564.jpeg" alt="紫色分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51fceb24e_1754157564.jpeg', alt: '紫色分镜2'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e51ffb028b_1754157567.jpeg" alt="紫色分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51ffb028b_1754157567.jpeg', alt: '紫色分镜3'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5201d473a_1754157569.jpeg" alt="紫色分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5201d473a_1754157569.jpeg', alt: '紫色分镜4'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5204c448a_1754157572.jpeg" alt="紫色分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5204c448a_1754157572.jpeg', alt: '紫色分镜5'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5207d568d_1754157575.jpeg" alt="紫色分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5207d568d_1754157575.jpeg', alt: '紫色分镜6'})"/>
+                  </div>
+                </div>
+                <div class="flex justify-center">
+                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://pic1.imgdb.cn/item/688e514758cb8da5c8ff414d.gif" alt="紫色动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688e514758cb8da5c8ff414d.gif', alt: '紫色动态帧'})"/>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 蓝色配色：梵高油画风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">蓝色配色：梵高油画风</h5>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5de39ca92_1754160611.jpeg" alt="蓝色风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5de39ca92_1754160611.jpeg', alt: '蓝色风格定调'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5d8792082_1754160519.jpeg" alt="蓝色分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d8792082_1754160519.jpeg', alt: '蓝色分镜1'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5d8e95eab_1754160526.jpeg" alt="蓝色分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d8e95eab_1754160526.jpeg', alt: '蓝色分镜2'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5d921adf0_1754160530.jpeg" alt="蓝色分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d921adf0_1754160530.jpeg', alt: '蓝色分镜3'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5d9393b9a_1754160531.jpeg" alt="蓝色分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9393b9a_1754160531.jpeg', alt: '蓝色分镜4'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5d9c61cfd_1754160540.jpeg" alt="蓝色分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9c61cfd_1754160540.jpeg', alt: '蓝色分镜5'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5d9f29c6e_1754160543.jpeg" alt="蓝色分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9f29c6e_1754160543.jpeg', alt: '蓝色分镜6'})"/>
+                  </div>
+                </div>
+                <div class="flex justify-center">
+                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://pic1.imgdb.cn/item/688e573a58cb8da5c8ff47a4.gif" alt="蓝色动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688e573a58cb8da5c8ff47a4.gif', alt: '蓝色动态帧'})"/>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 红白配色：东西方融合版画风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">红白配色：东西方融合版画风</h5>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-4">
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688eeccae52cd_1754197194.jpeg" alt="红白风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eeccae52cd_1754197194.jpeg', alt: '红白风格定调'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688eece76f7bd_1754197223.jpeg" alt="红白分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eece76f7bd_1754197223.jpeg', alt: '红白分镜1'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688ef2157154a_1754198549.jpeg" alt="红白分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2157154a_1754198549.jpeg', alt: '红白分镜2'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688eecff10f2a_1754197247.jpeg" alt="红白分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eecff10f2a_1754197247.jpeg', alt: '红白分镜3'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688ef230e35d6_1754198576.jpeg" alt="红白分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef230e35d6_1754198576.jpeg', alt: '红白分镜4'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688ef2bc56b81_1754198716.jpeg" alt="红白分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2bc56b81_1754198716.jpeg', alt: '红白分镜5'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688ef2c85bd30_1754198728.jpeg" alt="红白分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2c85bd30_1754198728.jpeg', alt: '红白分镜6'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688ef25d94cdb_1754198621.jpeg" alt="红白分镜7" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef25d94cdb_1754198621.jpeg', alt: '红白分镜7'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688ef3050cdb3_1754198789.jpeg" alt="红白分镜8" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef3050cdb3_1754198789.jpeg', alt: '红白分镜8'})"/>
+                  </div>
+                </div>
+                <div class="flex justify-center">
+                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://pic1.imgdb.cn/item/688efb6058cb8da5c8fff2ee.gif" alt="红白动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688efb6058cb8da5c8fff2ee.gif', alt: '红白动态帧'})"/>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 绿白配色：极简图形风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">绿白配色：极简图形风</h5>
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688eeb5a324f6_1754196826.jpeg" alt="绿白风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eeb5a324f6_1754196826.jpeg', alt: '绿白风格定调'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5e80a510f_1754160768.jpeg" alt="绿白分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5e80a510f_1754160768.jpeg', alt: '绿白分镜1'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5ec1ec39a_1754160833.jpeg" alt="绿白分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ec1ec39a_1754160833.jpeg', alt: '绿白分镜2'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5e929f17c_1754160786.jpeg" alt="绿白分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5e929f17c_1754160786.jpeg', alt: '绿白分镜3'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5ea1d0bf6_1754160801.jpeg" alt="绿白分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ea1d0bf6_1754160801.jpeg', alt: '绿白分镜4'})"/>
+                  </div>
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://img.cdn1.vip/i/688e5ed797509_1754160855.jpeg" alt="绿白分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ed797509_1754160855.jpeg', alt: '绿白分镜5'})"/>
+                  </div>
+                </div>
+                <div class="flex justify-center">
+                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                    <img src="https://pic1.imgdb.cn/item/688eec1d58cb8da5c8ffc7f1.gif" alt="绿白动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688eec1d58cb8da5c8ffc7f1.gif', alt: '绿白动态帧'})"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 项目思考 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div class="bg-gradient-to-br from-green-900 to-black p-8 rounded-2xl border border-green-400 border-opacity-30">
+                <h6 class="text-xl font-bold mb-4 text-green-400">The Goal</h6>
+                <p class="text-gray-300 leading-relaxed">
+                  为新品的多配色展现探索更具视觉冲击力和成本效益的宣传片制作方式。
+                </p>
+              </div>
+              <div class="bg-gradient-to-br from-green-900 to-black p-8 rounded-2xl border border-green-400 border-opacity-30">
+                <h6 class="text-xl font-bold mb-4 text-green-400">My Method</h6>
+                <p class="text-gray-300 leading-relaxed">
+                  研究并测试了多种视频转绘技术组合，包括IP-Adapter、风格LoRA、animatediff、Go Enhance等工具方法产出。
+                </p>
               </div>
             </div>
           </div>
