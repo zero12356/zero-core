@@ -449,7 +449,7 @@
         <!-- 项目4 -->
         <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20">
           <h3 class="text-4xl font-bold mb-8 text-center">
-            <span class="text-green-400">项目 4：</span>soundcore
+            <span class="text-green-400">项目 4：</span>soundcore视频转绘
           </h3>
           <div class="mb-12">
             <h4 class="text-2xl font-semibold mb-6 text-green-400">
