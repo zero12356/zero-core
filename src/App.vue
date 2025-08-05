@@ -1,6 +1,41 @@
 <!-- The exported code uses Tailwind CSS. Install Tailwind CSS in your dev environment to ensure all styles work. -->
 <template>
-  <div class="min-h-screen bg-black text-white font-sans">
+  <div class="min-h-screen bg-black text-white font-sans relative overflow-hidden">
+    <!-- 动态背景粒子 -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div v-for="i in 50" :key="i" class="particle absolute rounded-full bg-green-400 opacity-20" 
+           :style="getParticleStyle(i)"></div>
+    </div>
+    
+    <!-- 鼠标跟随粒子光标效果 -->
+    <div class="fixed pointer-events-none z-50">
+      <!-- 主光标 -->
+      <div ref="cursor" class="absolute w-4 h-4 bg-green-400 rounded-full transform -translate-x-1/2 -translate-y-1/2 cursor-glow smooth-cursor"></div>
+      
+      <!-- 丝滑拖尾粒子 -->
+      <div v-for="i in 15" :key="`trail-${i}`" :data-trail="i" 
+           class="absolute rounded-full transform -translate-x-1/2 -translate-y-1/2 trail-particle smooth-trail"
+           :style="{ 
+             width: `${Math.max(12 - i * 0.6, 2)}px`,
+             height: `${Math.max(12 - i * 0.6, 2)}px`,
+             background: `hsl(${120 + i * 2}, ${90 - i * 3}%, ${70 - i * 2}%)`,
+             opacity: Math.max(0.9 - i * 0.06, 0.1),
+             filter: `blur(${i * 0.3}px)`,
+             zIndex: 50 - i
+           }"></div>
+      
+      <!-- 飘散光斑粒子 -->
+      <div v-for="j in 15" :key="`sparkle-${j}`" :data-sparkle="j"
+           class="absolute rounded-full transform -translate-x-1/2 -translate-y-1/2 sparkle-particle"
+           :style="{
+             width: '0.5px',
+             height: '0.5px',
+             background: '#4ade80',
+             opacity: 0,
+             filter: 'blur(0.2px)',
+             zIndex: 45
+           }"></div>
+    </div>
     <!-- 封面区域 -->
     <div class="relative min-h-screen flex items-center justify-center overflow-hidden">
       <div
@@ -92,7 +127,7 @@
           <p class="text-2xl text-gray-400">Crafting Viral Effects for Mass Engagement</p>
         </div>
         <!-- 项目1 -->
-        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20">
+        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20 animate-on-scroll" data-animation="fadeInUp">
           <h3 class="text-4xl font-bold mb-8 text-center">
             <span class="text-green-400">项目 1：</span>人物转绘工作流设计
           </h3>
@@ -151,7 +186,7 @@
                     <div
                       v-for="(img, index) in koreanStyleImages"
                       :key="index"
-                      class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
+                      class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-green-400/30 transition-all duration-300 transform hover:-translate-y-2"
                     >
                       <img
                         :src="img.url"
@@ -188,7 +223,7 @@
           </div>
         </div>
         <!-- 项目详情 -->
-        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20">
+        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20 animate-on-scroll" data-animation="fadeInLeft">
           <h3 class="text-4xl font-bold mb-8 text-center">
             <span class="text-green-400">项目 2：</span>公司周年庆共创活动
           </h3>
@@ -201,12 +236,14 @@
               <h5 class="text-xl font-semibold mb-6 text-white"></h5>
               <p class="text-gray-400 mb-8">由员工共创生成的创意海报，兼具多样性和创意性</p>
               <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                <div
-                  v-for="(poster, index) in posterImages"
-                  :key="index"
-                  class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform"
-                  @click="openImageModal(poster)"
-                >
+                                  <div
+                    v-for="(poster, index) in posterImages"
+                    :key="index"
+                    class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-green-400/30 transition-all duration-300 transform hover:-translate-y-2 animate-on-scroll"
+                    :data-animation="`fadeInUp`"
+                    :style="{ animationDelay: `${index * 0.1}s` }"
+                    @click="openImageModal(poster)"
+                  >
                   <img
                     :src="poster.url"
                     :alt="`创意海报${index + 1}`"
@@ -223,12 +260,12 @@
                 <h5 class="text-xl font-semibold mb-4 text-green-400">工作流节点展示</h5>
                 <div class="overflow-hidden rounded-xl">
                   <img
-                    src="https://img.cdn1.vip/i/688e1acac98e0_1754143434.jpeg"
+                    src="https://i.mji.rip/2025/08/05/acb83ff9ea29777be3f118232f2244ed.png"
                     alt="工作流节点截图"
                     class="w-full h-full object-cover cursor-pointer"
                     @click="
                       openImageModal({
-                        url: 'https://img.cdn1.vip/i/688e1acac98e0_1754143434.jpeg',
+                        url: 'https://i.mji.rip/2025/08/05/acb83ff9ea29777be3f118232f2244ed.png',
                         alt: '工作流节点截图',
                       })
                     "
@@ -287,7 +324,7 @@
           <p class="text-2xl text-gray-400">AI-Driven Business Value & Product Enhancement</p>
         </div>
         <!-- 项目3 -->
-        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20">
+        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20 animate-on-scroll" data-animation="fadeInRight">
           <h3 class="text-4xl font-bold mb-8 text-center">
             <span class="text-green-400">项目 3：</span>产品卖点图Agent设计
           </h3>
@@ -447,7 +484,7 @@
           </div>
         </div>
         <!-- 项目4 -->
-        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20">
+        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20 animate-on-scroll" data-animation="fadeInUp">
           <h3 class="text-4xl font-bold mb-8 text-center">
             <span class="text-green-400">项目 4：</span>soundcore视频转绘
           </h3>
@@ -456,146 +493,8 @@
               动态视觉探索：为soundcore新品打造多风格AI转绘视频
             </h4>
             
-            <!-- 风格展示区域 -->
-            <div class="space-y-16 mb-12">
-              <!-- 紫色配色：现代扁平插画风 -->
-              <div class="space-y-6">
-                <h5 class="text-xl font-semibold text-white">紫色配色：现代扁平插画风</h5>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e51dd5fe0f_1754157533.jpeg" alt="紫色风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51dd5fe0f_1754157533.jpeg', alt: '紫色风格定调'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e52110cf69_1754157585.jpeg" alt="紫色分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e52110cf69_1754157585.jpeg', alt: '紫色分镜1'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e51fceb24e_1754157564.jpeg" alt="紫色分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51fceb24e_1754157564.jpeg', alt: '紫色分镜2'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e51ffb028b_1754157567.jpeg" alt="紫色分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51ffb028b_1754157567.jpeg', alt: '紫色分镜3'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5201d473a_1754157569.jpeg" alt="紫色分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5201d473a_1754157569.jpeg', alt: '紫色分镜4'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5204c448a_1754157572.jpeg" alt="紫色分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5204c448a_1754157572.jpeg', alt: '紫色分镜5'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5207d568d_1754157575.jpeg" alt="紫色分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5207d568d_1754157575.jpeg', alt: '紫色分镜6'})"/>
-                  </div>
-                </div>
-                <div class="flex justify-center">
-                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://pic1.imgdb.cn/item/688e514758cb8da5c8ff414d.gif" alt="紫色动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688e514758cb8da5c8ff414d.gif', alt: '紫色动态帧'})"/>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 蓝色配色：梵高油画风 -->
-              <div class="space-y-6">
-                <h5 class="text-xl font-semibold text-white">蓝色配色：梵高油画风</h5>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4">
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5de39ca92_1754160611.jpeg" alt="蓝色风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5de39ca92_1754160611.jpeg', alt: '蓝色风格定调'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5d8792082_1754160519.jpeg" alt="蓝色分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d8792082_1754160519.jpeg', alt: '蓝色分镜1'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5d8e95eab_1754160526.jpeg" alt="蓝色分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d8e95eab_1754160526.jpeg', alt: '蓝色分镜2'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5d921adf0_1754160530.jpeg" alt="蓝色分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d921adf0_1754160530.jpeg', alt: '蓝色分镜3'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5d9393b9a_1754160531.jpeg" alt="蓝色分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9393b9a_1754160531.jpeg', alt: '蓝色分镜4'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5d9c61cfd_1754160540.jpeg" alt="蓝色分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9c61cfd_1754160540.jpeg', alt: '蓝色分镜5'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5d9f29c6e_1754160543.jpeg" alt="蓝色分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9f29c6e_1754160543.jpeg', alt: '蓝色分镜6'})"/>
-                  </div>
-                </div>
-                <div class="flex justify-center">
-                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://pic1.imgdb.cn/item/688e573a58cb8da5c8ff47a4.gif" alt="蓝色动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688e573a58cb8da5c8ff47a4.gif', alt: '蓝色动态帧'})"/>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 红白配色：东西方融合版画风 -->
-              <div class="space-y-6">
-                <h5 class="text-xl font-semibold text-white">红白配色：东西方融合版画风</h5>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-9 gap-4">
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688eeccae52cd_1754197194.jpeg" alt="红白风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eeccae52cd_1754197194.jpeg', alt: '红白风格定调'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688eece76f7bd_1754197223.jpeg" alt="红白分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eece76f7bd_1754197223.jpeg', alt: '红白分镜1'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688ef2157154a_1754198549.jpeg" alt="红白分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2157154a_1754198549.jpeg', alt: '红白分镜2'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688eecff10f2a_1754197247.jpeg" alt="红白分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eecff10f2a_1754197247.jpeg', alt: '红白分镜3'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688ef230e35d6_1754198576.jpeg" alt="红白分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef230e35d6_1754198576.jpeg', alt: '红白分镜4'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688ef2bc56b81_1754198716.jpeg" alt="红白分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2bc56b81_1754198716.jpeg', alt: '红白分镜5'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688ef2c85bd30_1754198728.jpeg" alt="红白分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2c85bd30_1754198728.jpeg', alt: '红白分镜6'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688ef25d94cdb_1754198621.jpeg" alt="红白分镜7" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef25d94cdb_1754198621.jpeg', alt: '红白分镜7'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688ef3050cdb3_1754198789.jpeg" alt="红白分镜8" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef3050cdb3_1754198789.jpeg', alt: '红白分镜8'})"/>
-                  </div>
-                </div>
-                <div class="flex justify-center">
-                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://pic1.imgdb.cn/item/688efb6058cb8da5c8fff2ee.gif" alt="红白动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688efb6058cb8da5c8fff2ee.gif', alt: '红白动态帧'})"/>
-                  </div>
-                </div>
-              </div>
-
-              <!-- 绿白配色：极简图形风 -->
-              <div class="space-y-6">
-                <h5 class="text-xl font-semibold text-white">绿白配色：极简图形风</h5>
-                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688eeb5a324f6_1754196826.jpeg" alt="绿白风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eeb5a324f6_1754196826.jpeg', alt: '绿白风格定调'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5e80a510f_1754160768.jpeg" alt="绿白分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5e80a510f_1754160768.jpeg', alt: '绿白分镜1'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5ec1ec39a_1754160833.jpeg" alt="绿白分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ec1ec39a_1754160833.jpeg', alt: '绿白分镜2'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5e929f17c_1754160786.jpeg" alt="绿白分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5e929f17c_1754160786.jpeg', alt: '绿白分镜3'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5ea1d0bf6_1754160801.jpeg" alt="绿白分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ea1d0bf6_1754160801.jpeg', alt: '绿白分镜4'})"/>
-                  </div>
-                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://img.cdn1.vip/i/688e5ed797509_1754160855.jpeg" alt="绿白分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ed797509_1754160855.jpeg', alt: '绿白分镜5'})"/>
-                  </div>
-                </div>
-                <div class="flex justify-center">
-                  <div class="rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
-                    <img src="https://pic1.imgdb.cn/item/688eec1d58cb8da5c8ffc7f1.gif" alt="绿白动态帧" class="object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688eec1d58cb8da5c8ffc7f1.gif', alt: '绿白动态帧'})"/>
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <!-- 项目思考 -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
               <div class="bg-gradient-to-br from-green-900 to-black p-8 rounded-2xl border border-green-400 border-opacity-30">
                 <h6 class="text-xl font-bold mb-4 text-green-400">The Goal</h6>
                 <p class="text-gray-300 leading-relaxed">
@@ -609,10 +508,429 @@
                 </p>
               </div>
             </div>
+            
+            <!-- 风格展示区域 -->
+            <div class="space-y-16 mb-12">
+              <!-- 绿白配色：极简图形风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">绿白配色：极简图形风</h5>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                  <!-- 左侧静态图片区域 -->
+                  <div class="lg:col-span-3">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">分镜示意</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 h-full">
+                      <!-- 第一行 -->
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688eeb5a324f6_1754196826.jpeg" alt="绿白风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eeb5a324f6_1754196826.jpeg', alt: '绿白风格定调'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5e929f17c_1754160786.jpeg" alt="绿白分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5e929f17c_1754160786.jpeg', alt: '绿白分镜3'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5e80a510f_1754160768.jpeg" alt="绿白分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5e80a510f_1754160768.jpeg', alt: '绿白分镜1'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5ea1d0bf6_1754160801.jpeg" alt="绿白分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ea1d0bf6_1754160801.jpeg', alt: '绿白分镜4'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5ec1ec39a_1754160833.jpeg" alt="绿白分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ec1ec39a_1754160833.jpeg', alt: '绿白分镜2'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5ed797509_1754160855.jpeg" alt="绿白分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5ed797509_1754160855.jpeg', alt: '绿白分镜5'})"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 右侧动图区域 -->
+                  <div class="lg:col-span-2">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">动态示意</span>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-full min-h-[20rem]">
+                      <img src="https://pic1.imgdb.cn/item/688eec1d58cb8da5c8ffc7f1.gif" alt="绿白动态帧" class="w-full h-full object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688eec1d58cb8da5c8ffc7f1.gif', alt: '绿白动态帧'})"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 红白配色：东西方融合版画风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">红白配色：东西方融合版画风</h5>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                  <!-- 左侧静态图片区域 -->
+                  <div class="lg:col-span-3">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">分镜示意</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 h-full">
+                      <!-- 第一行 Z字形布局: 1 → 2 → 3 -->
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688eeccae52cd_1754197194.jpeg" alt="红白风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eeccae52cd_1754197194.jpeg', alt: '红白风格定调'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688eecff10f2a_1754197247.jpeg" alt="红白分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eecff10f2a_1754197247.jpeg', alt: '红白分镜3'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688ef2c85bd30_1754198728.jpeg" alt="红白分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2c85bd30_1754198728.jpeg', alt: '红白分镜6'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688eece76f7bd_1754197223.jpeg" alt="红白分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688eece76f7bd_1754197223.jpeg', alt: '红白分镜1'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688ef230e35d6_1754198576.jpeg" alt="红白分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef230e35d6_1754198576.jpeg', alt: '红白分镜4'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688ef25d94cdb_1754198621.jpeg" alt="红白分镜7" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef25d94cdb_1754198621.jpeg', alt: '红白分镜7'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688ef2157154a_1754198549.jpeg" alt="红白分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2157154a_1754198549.jpeg', alt: '红白分镜2'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688ef2bc56b81_1754198716.jpeg" alt="红白分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef2bc56b81_1754198716.jpeg', alt: '红白分镜5'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-32">
+                          <img src="https://img.cdn1.vip/i/688ef3050cdb3_1754198789.jpeg" alt="红白分镜8" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688ef3050cdb3_1754198789.jpeg', alt: '红白分镜8'})"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 右侧动图区域 -->
+                  <div class="lg:col-span-2">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">动态示意</span>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-full min-h-[20rem]">
+                      <img src="https://pic1.imgdb.cn/item/688efb6058cb8da5c8fff2ee.gif" alt="红白动态帧" class="w-full h-full object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688efb6058cb8da5c8fff2ee.gif', alt: '红白动态帧'})"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 紫色配色：现代扁平插画风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">紫色配色：现代扁平插画风</h5>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                  <!-- 左侧静态图片区域 -->
+                  <div class="lg:col-span-3">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">分镜示意</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 h-full">
+                      <!-- 第一行 -->
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e51dd5fe0f_1754157533.jpeg" alt="紫色风格定调" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51dd5fe0f_1754157533.jpeg', alt: '紫色风格定调'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e52110cf69_1754157585.jpeg" alt="紫色分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e52110cf69_1754157585.jpeg', alt: '紫色分镜1'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e51fceb24e_1754157564.jpeg" alt="紫色分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51fceb24e_1754157564.jpeg', alt: '紫色分镜2'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e51ffb028b_1754157567.jpeg" alt="紫色分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e51ffb028b_1754157567.jpeg', alt: '紫色分镜3'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5201d473a_1754157569.jpeg" alt="紫色分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5201d473a_1754157569.jpeg', alt: '紫色分镜4'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5204c448a_1754157572.jpeg" alt="紫色分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5204c448a_1754157572.jpeg', alt: '紫色分镜5'})"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 右侧动图区域 -->
+                  <div class="lg:col-span-2">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">动态示意</span>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-full min-h-[20rem]">
+                      <img src="https://pic1.imgdb.cn/item/688e514758cb8da5c8ff414d.gif" alt="紫色动态帧" class="w-full h-full object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688e514758cb8da5c8ff414d.gif', alt: '紫色动态帧'})"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 蓝色配色：梵高油画风 -->
+              <div class="space-y-6">
+                <h5 class="text-xl font-semibold text-white">蓝色配色：梵高油画风</h5>
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                  <!-- 左侧静态图片区域 -->
+                  <div class="lg:col-span-3">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">分镜示意</span>
+                    </div>
+                    <div class="grid grid-cols-3 gap-3 h-full">
+                      <!-- 第一行 -->
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5d8792082_1754160519.jpeg" alt="蓝色分镜1" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d8792082_1754160519.jpeg', alt: '蓝色分镜1'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5d9393b9a_1754160531.jpeg" alt="蓝色分镜4" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9393b9a_1754160531.jpeg', alt: '蓝色分镜4'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5d8e95eab_1754160526.jpeg" alt="蓝色分镜2" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d8e95eab_1754160526.jpeg', alt: '蓝色分镜2'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5d9c61cfd_1754160540.jpeg" alt="蓝色分镜5" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9c61cfd_1754160540.jpeg', alt: '蓝色分镜5'})"/>
+                        </div>
+                      </div>
+                      <div class="space-y-3">
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5d921adf0_1754160530.jpeg" alt="蓝色分镜3" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d921adf0_1754160530.jpeg', alt: '蓝色分镜3'})"/>
+                        </div>
+                        <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-40">
+                          <img src="https://img.cdn1.vip/i/688e5d9f29c6e_1754160543.jpeg" alt="蓝色分镜6" class="w-full h-full object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688e5d9f29c6e_1754160543.jpeg', alt: '蓝色分镜6'})"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- 右侧动图区域 -->
+                  <div class="lg:col-span-2">
+                    <div class="mb-2">
+                      <span class="text-sm text-gray-400 bg-gray-800 bg-opacity-60 px-3 py-1 rounded-full">动态示意</span>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform h-full min-h-[20rem]">
+                      <img src="https://pic1.imgdb.cn/item/688e573a58cb8da5c8ff47a4.gif" alt="蓝色动态帧" class="w-full h-full object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688e573a58cb8da5c8ff47a4.gif', alt: '蓝色动态帧'})"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    
+    <!-- Chapter 3 -->
+    <div class="py-20 px-8 bg-gradient-to-br from-black via-gray-900 to-purple-900">
+      <div class="max-w-7xl mx-auto">
+        <!-- 章节标题 -->
+        <div class="text-center mb-16">
+          <h2 class="text-5xl font-bold mb-6">
+            <span class="text-white">Chapter 3</span>
+            <span class="text-green-400"> 风格美学：定义和创造新风格</span>
+          </h2>
+          <p class="text-2xl text-gray-400">Style Aesthetics: Defining & Creating New Visual Languages</p>
+        </div>
+        
+        <!-- 项目5 -->
+        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20 mb-12 animate-on-scroll" data-animation="fadeInLeft">
+          <h3 class="text-4xl font-bold mb-8 text-center">
+            <span class="text-green-400">项目 5：</span>万圣节节日投影风格设计
+          </h3>
+          <div class="mb-12">
+            <h4 class="text-2xl font-semibold mb-6 text-green-400">
+              从0到1构建节日主题特效贴纸包：万圣节风格LoRA模型训练与应用
+            </h4>
+            
+            <!-- 项目思考 -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+              <div class="bg-gradient-to-br from-green-900 to-black p-8 rounded-2xl border border-green-400 border-opacity-30">
+                <h6 class="text-xl font-bold mb-4 text-green-400">The Goal</h6>
+                <p class="text-gray-300 leading-relaxed">
+                  为投影产品快速、批量地生成高质量、风格统一的万圣节贴纸内容。
+                </p>
+              </div>
+              <div class="bg-gradient-to-br from-green-900 to-black p-8 rounded-2xl border border-green-400 border-opacity-30">
+                <h6 class="text-xl font-bold mb-4 text-green-400">My Method</h6>
+                <p class="text-gray-300 leading-relaxed">
+                  收集数据并训练了三款主题LoRA模型（霓虹灯艺术、暗黑幻想、粒子梦幻），保证风格的独特性和一致性。并基于这三款模型，构建了包含背景、元素、的'万圣节特效素材库'，设计师可以直接调用，极大提升内容生产效率。
+                </p>
+              </div>
+            </div>
+            
+            <!-- 风格展示区域 -->
+            <div class="space-y-16 mb-12">
+              <!-- 风格一：霓虹灯艺术风格 -->
+              <div class="space-y-8">
+                <h5 class="text-2xl font-semibold text-green-400">风格一：霓虹灯艺术风格</h5>
+                
+                <!-- 背景展示 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">背景素材</h6>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img src="https://img.cdn1.vip/i/688efd81a66fe_1754201473.jpeg" alt="霓虹背景1" class="w-full h-48 object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688efd81a66fe_1754201473.jpeg', alt: '霓虹背景1'})"/>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img src="https://img.cdn1.vip/i/688efd80b677b_1754201472.jpeg" alt="霓虹背景2" class="w-full h-48 object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688efd80b677b_1754201472.jpeg', alt: '霓虹背景2'})"/>
+                    </div>
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img src="https://img.cdn1.vip/i/688efd7f8655d_1754201471.jpeg" alt="霓虹背景3" class="w-full h-48 object-cover" @click="openImageModal({url: 'https://img.cdn1.vip/i/688efd7f8655d_1754201471.jpeg', alt: '霓虹背景3'})"/>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 元素展示 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">设计元素</h6>
+                  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div v-for="(element, index) in neonElements" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img :src="element.url" :alt="element.alt" class="w-full h-32 object-cover" @click="openImageModal(element)"/>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 应用效果 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">应用效果</h6>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div v-for="(effect, index) in neonEffects" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img :src="effect.url" :alt="effect.alt" class="w-full h-48 object-cover" @click="openImageModal(effect)"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 风格二：暗黑幻想风格 -->
+              <div class="space-y-8">
+                <h5 class="text-2xl font-semibold text-green-400">风格二：暗黑幻想风格</h5>
+                
+                <!-- 背景展示 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">背景素材</h6>
+                  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div v-for="(bg, index) in darkFantasyBgs" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img :src="bg.url" :alt="bg.alt" class="w-full h-48 object-cover" @click="openImageModal(bg)"/>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 元素展示 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">设计元素</h6>
+                  <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                    <div v-for="(element, index) in darkFantasyElements" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img :src="element.url" :alt="element.alt" class="w-full h-32 object-cover" @click="openImageModal(element)"/>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 关键帧应用和动态帧 -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                  <div class="lg:col-span-2 space-y-4">
+                    <h6 class="text-lg font-medium text-white">关键帧应用</h6>
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                      <div v-for="(frame, index) in darkFantasyFrames" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                        <img :src="frame.url" :alt="frame.alt" class="w-full h-32 object-cover" @click="openImageModal(frame)"/>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="space-y-4">
+                    <h6 class="text-lg font-medium text-white">动态帧示意</h6>
+                    <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img src="https://pic1.imgdb.cn/item/688f016f58cb8da5c8fff935.gif" alt="暗黑幻想动态帧" class="w-full h-48 object-contain" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688f016f58cb8da5c8fff935.gif', alt: '暗黑幻想动态帧'})"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- 风格三：粒子梦幻风格 -->
+              <div class="space-y-8">
+                <h5 class="text-2xl font-semibold text-green-400">风格三：粒子梦幻风格</h5>
+                
+                <!-- 背景展示 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">背景素材</h6>
+                  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div v-for="(bg, index) in particleDreamBgs" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img :src="bg.url" :alt="bg.alt" class="w-full h-48 object-cover" @click="openImageModal(bg)"/>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 元素展示 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">设计元素</h6>
+                  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    <div v-for="(element, index) in particleDreamElements" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img :src="element.url" :alt="element.alt" class="w-full h-32 object-cover" @click="openImageModal(element)"/>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- 应用效果 -->
+                <div class="space-y-4">
+                  <h6 class="text-lg font-medium text-white">应用效果</h6>
+                  <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
+                    <div v-for="(effect, index) in particleDreamEffects" :key="index" class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 transition-transform">
+                      <img :src="effect.url" :alt="effect.alt" class="w-full h-48 object-cover" @click="openImageModal(effect)"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 项目6 -->
+        <div class="bg-gray-900 rounded-3xl p-12 border border-green-400 border-opacity-20 animate-on-scroll" data-animation="fadeInRight">
+          <h3 class="text-4xl font-bold mb-8 text-center">
+            <span class="text-green-400">项目 6：</span>狼人杀卡片角色设计
+          </h3>
+          <div class="mb-12">
+            <h4 class="text-2xl font-semibold mb-6 text-green-400">
+              风格融合实验：日式动漫 x 欧洲复古插画
+            </h4>
+            
+            <!-- 项目思考 -->
+            <div class="mb-12">
+              <div class="bg-gradient-to-br from-green-900 to-black p-8 rounded-2xl border border-green-400 border-opacity-30">
+                <h6 class="text-xl font-bold mb-4 text-green-400">My Method</h6>
+                <p class="text-gray-300 leading-relaxed">
+                  探索不同文化风格碰撞，通过Midjourney的Blend和精准的提示词工程，将两种看似无关的风格（日式动漫的人物动态和欧洲复古插画的笔触质感）进行融合，创造出一种全新的、具有叙事感的视觉语言，并用--sref进行控制产出一系列角色设计。
+                </p>
+              </div>
+            </div>
+            
+            <!-- 角色卡片展示 -->
+            <div class="space-y-8">
+              <h5 class="text-xl font-semibold text-white">角色设计展示</h5>
+              
+              <!-- 牌背设计和角色卡片一整行展示 -->
+              <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+                <!-- 牌背设计 -->
+                <div class="space-y-2 animate-on-scroll" data-animation="fadeInLeft">
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-green-400/30 transition-all duration-300 transform hover:-translate-y-2">
+                    <img src="https://pic1.imgdb.cn/item/688f07e358cb8da5c8000a28.png" alt="狼人杀牌背设计" class="w-full h-auto object-cover" @click="openImageModal({url: 'https://pic1.imgdb.cn/item/688f07e358cb8da5c8000a28.png', alt: '狼人杀牌背设计'})"/>
+                  </div>
+                  <p class="text-center text-sm text-gray-300">牌背</p>
+                </div>
+                
+                <!-- 角色卡片 -->
+                <div v-for="(card, index) in werewolfCards" :key="index" class="space-y-2 animate-on-scroll" data-animation="fadeInUp" :style="{ animationDelay: `${(index + 1) * 0.15}s` }">
+                  <div class="overflow-hidden rounded-xl border border-green-400 border-opacity-30 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-green-400/30 transition-all duration-300 transform hover:-translate-y-2">
+                    <img :src="card.url" :alt="card.alt" class="w-full h-auto object-cover" @click="openImageModal(card)"/>
+                  </div>
+                  <p class="text-center text-sm text-gray-300">{{ card.name }}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <!-- Thanks 封底 -->
     <div
       class="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-green-900"
@@ -683,20 +1001,204 @@
 </template>
 
 <script lang="ts" setup>
-  import { ref } from 'vue';
-  interface PosterImage {
-    url: string;
-    alt: string;
-  }
+  import { ref, onMounted, onUnmounted } from 'vue';
+  
   const showModal = ref(false);
-  const selectedImage = ref<PosterImage | null>(null);
-  const koreanStyleImages: PosterImage[] = [
+  const selectedImage = ref(null);
+  
+  // 动态交互状态
+  const cursor = ref<HTMLElement | null>(null);
+  
+  // 丝滑光标系统
+  const cursorPos = ref({ x: 0, y: 0 });
+  const targetPos = ref({ x: 0, y: 0 });
+  const trailElements = [];
+  const sparkleElements = [];
+  const trailPositions = [];
+  let animationId;
+  let lastSparkleTime = 0;
+  
+  // 缓动函数
+  const lerp = (start, end, factor) => {
+    return start + (end - start) * factor;
+  };
+  
+  // 计算速度
+  let lastMousePos = { x: 0, y: 0 };
+  let mouseVelocity = { x: 0, y: 0 };
+  
+  // 鼠标跟随粒子效果
+  const updateCursor = (e) => {
+    targetPos.value.x = e.clientX;
+    targetPos.value.y = e.clientY;
+    
+    // 计算鼠标速度
+    mouseVelocity.x = e.clientX - lastMousePos.x;
+    mouseVelocity.y = e.clientY - lastMousePos.y;
+    lastMousePos.x = e.clientX;
+    lastMousePos.y = e.clientY;
+  };
+  
+  // 丝滑动画循环
+  const smoothAnimation = () => {
+    // 主光标平滑跟随
+    cursorPos.value.x = lerp(cursorPos.value.x, targetPos.value.x, 0.15);
+    cursorPos.value.y = lerp(cursorPos.value.y, targetPos.value.y, 0.15);
+    
+    if (cursor.value) {
+      const speed = Math.sqrt(mouseVelocity.x ** 2 + mouseVelocity.y ** 2);
+      const motionBlur = Math.min(speed * 0.3, 8);
+      
+      cursor.value.style.left = cursorPos.value.x + 'px';
+      cursor.value.style.top = cursorPos.value.y + 'px';
+      cursor.value.style.filter = `blur(${motionBlur * 0.1}px)`;
+    }
+    
+    // 更新拖尾粒子位置（更自然的跟随）
+    trailElements.forEach((trail, index) => {
+      if (!trailPositions[index]) {
+        trailPositions[index] = { 
+          x: cursorPos.value.x, 
+          y: cursorPos.value.y, 
+          vx: 0, 
+          vy: 0 
+        };
+      }
+      
+      const pos = trailPositions[index];
+      const delay = (index + 1) * 0.08; // 延迟系数
+      const spring = 0.12 - delay * 0.005; // 弹性系数
+      const damping = 0.85; // 阻尼系数
+      
+      // 弹性动画
+      const dx = cursorPos.value.x - pos.x;
+      const dy = cursorPos.value.y - pos.y;
+      
+      pos.vx += dx * spring;
+      pos.vy += dy * spring;
+      pos.vx *= damping;
+      pos.vy *= damping;
+      
+      pos.x += pos.vx;
+      pos.y += pos.vy;
+      
+      // 运动模糊
+      const trailSpeed = Math.sqrt(pos.vx ** 2 + pos.vy ** 2);
+      const blur = Math.min(trailSpeed * 0.2 + index * 0.3, 4);
+      
+      trail.style.left = pos.x + 'px';
+      trail.style.top = pos.y + 'px';
+      trail.style.filter = `blur(${blur}px)`;
+    });
+    
+    // 飘散光斑粒子效果（降低频率，减少干扰）
+    const now = Date.now();
+    const speed = Math.sqrt(mouseVelocity.x ** 2 + mouseVelocity.y ** 2);
+    if (now - lastSparkleTime > 120 && speed > 5) { // 每120ms且快速移动时才创建光斑
+      createSparkle();
+      lastSparkleTime = now;
+    }
+    
+    // 更新现有光斑
+    updateSparkles();
+    
+    animationId = requestAnimationFrame(smoothAnimation);
+  };
+  
+  // 创建飘散光斑（沿轨迹方向）
+  const createSparkle = () => {
+    const speed = Math.sqrt(mouseVelocity.x ** 2 + mouseVelocity.y ** 2);
+    if (speed < 5) return; // 提高触发门槛
+    
+    const availableSparkle = sparkleElements.find(el => el.style.opacity === '0');
+    if (availableSparkle) {
+      // 计算运动方向
+      const moveAngle = Math.atan2(mouseVelocity.y, mouseVelocity.x);
+      // 在运动方向的垂直方向上添加小幅随机偏移
+      const perpAngle = moveAngle + Math.PI / 2;
+      const offsetDistance = (Math.random() - 0.5) * 15; // 减小偏移范围
+      
+      const sparkleX = cursorPos.value.x + Math.cos(perpAngle) * offsetDistance;
+      const sparkleY = cursorPos.value.y + Math.sin(perpAngle) * offsetDistance;
+      
+      availableSparkle.style.left = sparkleX + 'px';
+      availableSparkle.style.top = sparkleY + 'px';
+      availableSparkle.style.opacity = '0.3'; // 降低初始透明度
+      availableSparkle.style.transform = 'translate(-50%, -50%) scale(0.8)';
+      
+      // 沿运动轨迹的反方向飘散
+      const driftX = -mouseVelocity.x * 0.3 + (Math.random() - 0.5) * 10;
+      const driftY = -mouseVelocity.y * 0.3 + (Math.random() - 0.5) * 10;
+      
+      // 设置更细腻的飘散动画
+      availableSparkle.animate([
+        { 
+          opacity: '0.3', 
+          transform: 'translate(-50%, -50%) scale(0.8)',
+          filter: 'blur(0.2px)'
+        },
+        { 
+          opacity: '0', 
+          transform: `translate(-50%, -50%) scale(0.2) translate(${driftX}px, ${driftY}px)`,
+          filter: 'blur(1px)'
+        }
+      ], {
+        duration: 600 + Math.random() * 300, // 缩短动画时间
+        easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+      }).onfinish = () => {
+        availableSparkle.style.opacity = '0';
+      };
+    }
+  };
+  
+  // 更新光斑粒子
+  const updateSparkles = () => {
+    // 这个函数主要用于处理动画完成后的清理
+    // 大部分工作由Web Animations API处理
+  };
+  
+  // 粒子样式生成
+  const getParticleStyle = (index) => {
+    const size = Math.random() * 4 + 1;
+    const x = Math.random() * 100;
+    const y = Math.random() * 100;
+    const animationDelay = Math.random() * 20;
+    const animationDuration = Math.random() * 10 + 10;
+    
+    return {
+      width: `${size}px`,
+      height: `${size}px`,
+      left: `${x}%`,
+      top: `${y}%`,
+      animationDelay: `${animationDelay}s`,
+      animationDuration: `${animationDuration}s`,
+    };
+  };
+  
+  // 滚动动画观察器
+  const initScrollAnimations = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const animation = entry.target.getAttribute('data-animation');
+          entry.target.classList.add('animate-in', animation || 'fadeInUp');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+      observer.observe(el);
+    });
+  };
+  
+
+  const koreanStyleImages = [
     { url: 'https://img.cdn1.vip/i/688e267929ebf_1754146425.jpeg', alt: '韩风1' },
     { url: 'https://img.cdn1.vip/i/688e266d22c81_1754146413.jpeg', alt: '韩风2' },
     { url: 'https://img.cdn1.vip/i/688e266f044ec_1754146415.jpeg', alt: '韩风3' },
     { url: 'https://img.cdn1.vip/i/688e266e5adb2_1754146414.jpeg', alt: '韩风4' },
   ];
-  const posterImages: PosterImage[] = [
+  const posterImages = [
     {
       url: 'https://static.readdy.ai/image/b1272b1ab6637be948241a67e27cd463/2372dc00ce8fcbf9482134a699f3117b.png',
       alt: '创意海报1',
@@ -770,7 +1272,110 @@
       alt: '创意海报22',
     },
   ];
-  const openImageModal = (image: PosterImage) => {
+
+  // Chapter 3 图片数据
+  
+  // 霓虹灯艺术风格元素
+  const neonElements = [
+    { url: 'https://img.cdn1.vip/i/688f02ae75e9f_1754202798.jpeg', alt: '霓虹元素1' },
+    { url: 'https://img.cdn1.vip/i/688f02b79b482_1754202807.jpeg', alt: '霓虹元素2' },
+    { url: 'https://img.cdn1.vip/i/688f02b92a64d_1754202809.jpeg', alt: '霓虹元素3' },
+    { url: 'https://img.cdn1.vip/i/688f02ba39c8c_1754202810.jpeg', alt: '霓虹元素4' },
+    { url: 'https://img.cdn1.vip/i/688f02b98d68c_1754202809.jpeg', alt: '霓虹元素5' },
+    { url: 'https://pic1.imgdb.cn/item/688f030358cb8da5c8fffb4b.jpg', alt: '霓虹元素6' },
+    { url: 'https://pic1.imgdb.cn/item/688f030358cb8da5c8fffb4a.jpg', alt: '霓虹元素7' },
+    { url: 'https://pic1.imgdb.cn/item/688f034258cb8da5c8fffc0e.jpg', alt: '霓虹元素8' },
+    { url: 'https://pic1.imgdb.cn/item/688f034258cb8da5c8fffc18.jpg', alt: '霓虹元素9' },
+    { url: 'https://pic1.imgdb.cn/item/688f034258cb8da5c8fffc19.jpg', alt: '霓虹元素10' },
+    { url: 'https://pic1.imgdb.cn/item/688f038258cb8da5c8fffcc0.jpg', alt: '霓虹元素11' },
+    { url: 'https://pic1.imgdb.cn/item/688f038b58cb8da5c8fffce0.jpg', alt: '霓虹元素12' },
+    { url: 'https://pic1.imgdb.cn/item/688f038c58cb8da5c8fffce4.jpg', alt: '霓虹元素13' },
+    { url: 'https://pic1.imgdb.cn/item/688f038c58cb8da5c8fffce5.jpg', alt: '霓虹元素14' },
+    { url: 'https://pic1.imgdb.cn/item/688f038c58cb8da5c8fffce6.jpg', alt: '霓虹元素15' },
+    { url: 'https://pic1.imgdb.cn/item/688f03ee58cb8da5c8fffdfb.jpg', alt: '霓虹元素16' },
+    { url: 'https://pic1.imgdb.cn/item/688f03ed58cb8da5c8fffdf8.jpg', alt: '霓虹元素17' },
+    { url: 'https://pic1.imgdb.cn/item/688f03f558cb8da5c8fffe12.jpg', alt: '霓虹元素18' },
+    { url: 'https://pic1.imgdb.cn/item/688f03f658cb8da5c8fffe15.jpg', alt: '霓虹元素19' },
+    { url: 'https://pic1.imgdb.cn/item/688f03f858cb8da5c8fffe1d.jpg', alt: '霓虹元素20' },
+    { url: 'https://pic1.imgdb.cn/item/688f03f958cb8da5c8fffe1e.jpg', alt: '霓虹元素21' },
+  ];
+
+  // 霓虹灯艺术风格应用效果
+  const neonEffects = [
+    { url: 'https://i.mji.rip/2025/08/05/6d6cdfe879eec0f7e2b92651ea9e9af0.png', alt: '霓虹应用效果1' },
+    { url: 'https://i.mji.rip/2025/08/05/9ec92f89eeefa5d5873abf2e6390519b.png', alt: '霓虹应用效果2' },
+    { url: 'https://i.mji.rip/2025/08/05/a79e03c533dedf461b53c62b76d05a17.png', alt: '霓虹应用效果3' },
+    { url: 'https://i.mji.rip/2025/08/05/64200e851356e9dc4cd44d0fc230a49e.png', alt: '霓虹应用效果4' },
+  ];
+
+  // 暗黑幻想风格背景
+  const darkFantasyBgs = [
+    { url: 'https://pic1.imgdb.cn/item/688f184e58cb8da5c8002c84.jpg', alt: '暗黑幻想背景1' },
+    { url: 'https://pic1.imgdb.cn/item/688f187458cb8da5c8002ce1.jpg', alt: '暗黑幻想背景2' },
+    { url: 'https://pic1.imgdb.cn/item/688f187458cb8da5c8002ce2.jpg', alt: '暗黑幻想背景3' },
+  ];
+
+  // 暗黑幻想风格元素
+  const darkFantasyElements = [
+    { url: 'https://pic1.imgdb.cn/item/688f04ac58cb8da5c8000038.jpg', alt: '暗黑幻想元素1' },
+    { url: 'https://pic1.imgdb.cn/item/688f04a958cb8da5c800002e.jpg', alt: '暗黑幻想元素2' },
+    { url: 'https://pic1.imgdb.cn/item/688f04b958cb8da5c800006a.jpg', alt: '暗黑幻想元素3' },
+    { url: 'https://pic1.imgdb.cn/item/688f04bd58cb8da5c8000073.jpg', alt: '暗黑幻想元素4' },
+    { url: 'https://pic1.imgdb.cn/item/688f04c458cb8da5c800008a.jpg', alt: '暗黑幻想元素5' },
+    { url: 'https://pic1.imgdb.cn/item/688f04c958cb8da5c800009d.jpg', alt: '暗黑幻想元素6' },
+    { url: 'https://pic1.imgdb.cn/item/688f05f058cb8da5c8000465.jpg', alt: '暗黑幻想元素7' },
+    { url: 'https://pic1.imgdb.cn/item/688f05d858cb8da5c80003a6.jpg', alt: '暗黑幻想元素8' },
+    { url: 'https://pic1.imgdb.cn/item/688f05e058cb8da5c80003e1.jpg', alt: '暗黑幻想元素9' },
+    { url: 'https://pic1.imgdb.cn/item/688f05e658cb8da5c8000411.jpg', alt: '暗黑幻想元素10' },
+    { url: 'https://pic1.imgdb.cn/item/688f064c58cb8da5c800065c.jpg', alt: '暗黑幻想元素11' },
+  ];
+
+  // 暗黑幻想风格关键帧
+  const darkFantasyFrames = [
+    { url: 'https://pic1.imgdb.cn/item/688f068958cb8da5c8000703.jpg', alt: '暗黑幻想关键帧1' },
+    { url: 'https://pic1.imgdb.cn/item/688f069358cb8da5c8000717.jpg', alt: '暗黑幻想关键帧2' },
+    { url: 'https://pic1.imgdb.cn/item/688f069658cb8da5c8000721.jpg', alt: '暗黑幻想关键帧3' },
+    { url: 'https://pic1.imgdb.cn/item/688f06ab58cb8da5c800074c.jpg', alt: '暗黑幻想关键帧4' },
+    { url: 'https://pic1.imgdb.cn/item/688f06ac58cb8da5c800074f.jpg', alt: '暗黑幻想关键帧5' },
+  ];
+
+  // 粒子梦幻风格背景
+  const particleDreamBgs = [
+    { url: 'https://i.mji.rip/2025/08/05/52ca6d53d2b351bbed93d096d135c417.png', alt: '粒子梦幻背景1' },
+    { url: 'https://i.mji.rip/2025/08/05/5ad35a560f624004443129751d5e6250.png', alt: '粒子梦幻背景2' },
+    { url: 'https://i.mji.rip/2025/08/05/dafd9ec4a6fc8a304a470b27992ba391.png', alt: '粒子梦幻背景3' },
+    { url: 'https://i.mji.rip/2025/08/05/931a2637eec7b1cf77e45074751a8bfb.png', alt: '粒子梦幻背景4' },
+  ];
+
+  // 粒子梦幻风格元素
+  const particleDreamElements = [
+    { url: 'https://i.mji.rip/2025/08/05/757f53268689d65116843d8233614014.png', alt: '粒子梦幻元素1' },
+    { url: 'https://i.mji.rip/2025/08/05/525a026cfc7207e0a10f2b289aed4017.png', alt: '粒子梦幻元素2' },
+    { url: 'https://i.mji.rip/2025/08/05/e897dac6b2170e9ce5c3e3660dee0bb7.png', alt: '粒子梦幻元素3' },
+    { url: 'https://i.mji.rip/2025/08/05/3d39884021b4da12b8d2326dbad548cb.png', alt: '粒子梦幻元素4' },
+    { url: 'https://i.mji.rip/2025/08/05/d2fe50095c463b24054808ab032392bd.png', alt: '粒子梦幻元素5' },
+  ];
+
+  // 粒子梦幻风格应用效果
+  const particleDreamEffects = [
+    { url: 'https://i.mji.rip/2025/08/05/9370920c94ace9f23cd6f4c8e40bd69d.jpeg', alt: '粒子梦幻应用效果1' },
+    { url: 'https://i.mji.rip/2025/08/05/15933c14bcc9a23fc7c703605d0d1255.jpeg', alt: '粒子梦幻应用效果2' },
+    { url: 'https://i.mji.rip/2025/08/05/678937b10c28e345a160b1ba76b1c5f5.jpeg', alt: '粒子梦幻应用效果3' },
+    { url: 'https://i.mji.rip/2025/08/05/3eb45247e98d334f6e316671b59e0844.jpeg', alt: '粒子梦幻应用效果4' },
+    { url: 'https://i.mji.rip/2025/08/05/98e258091ca33b030ab44b46f57b0cb3.jpeg', alt: '粒子梦幻应用效果5' },
+  ];
+
+  // 狼人杀角色卡片
+  const werewolfCards = [
+    { url: 'https://pic1.imgdb.cn/item/688f07ea58cb8da5c8000a37.png', alt: '平民角色', name: '平民' },
+    { url: 'https://pic1.imgdb.cn/item/688f182258cb8da5c8002c1a.png', alt: '狼人角色', name: '狼人' },
+    { url: 'https://pic1.imgdb.cn/item/688f08bc58cb8da5c8000c19.png', alt: '预言家角色', name: '预言家' },
+    { url: 'https://pic1.imgdb.cn/item/688f08df58cb8da5c8000c68.png', alt: '女巫角色', name: '女巫' },
+    { url: 'https://pic1.imgdb.cn/item/688f08fd58cb8da5c8000cbb.png', alt: '守卫角色', name: '守卫' },
+    { url: 'https://pic1.imgdb.cn/item/688f096558cb8da5c8000da1.png', alt: '猎人角色', name: '猎人' },
+    { url: 'https://pic1.imgdb.cn/item/688f098e58cb8da5c8000dc8.png', alt: '警长角色', name: '警长' },
+  ];
+  const openImageModal = (image) => {
     selectedImage.value = image;
     showModal.value = true;
   };
@@ -778,6 +1383,82 @@
     showModal.value = false;
     selectedImage.value = null;
   };
+  
+  // 生命周期函数
+  onMounted(() => {
+    // 等待DOM渲染完成后初始化粒子系统
+    setTimeout(() => {
+      // 初始化拖尾粒子
+      for (let i = 1; i <= 15; i++) {
+        const trail = document.querySelector(`[data-trail="${i}"]`);
+        if (trail) {
+          trailElements.push(trail);
+        }
+      }
+      
+      // 初始化飘散光斑粒子
+      for (let j = 1; j <= 15; j++) {
+        const sparkle = document.querySelector(`[data-sparkle="${j}"]`);
+        if (sparkle) {
+          sparkleElements.push(sparkle);
+        }
+      }
+      
+      // 启动丝滑动画循环
+      smoothAnimation();
+    }, 100);
+    
+    // 初始化鼠标跟随效果
+    document.addEventListener('mousemove', updateCursor);
+    
+    // 初始化滚动动画
+    initScrollAnimations();
+    
+    // 为交互元素添加悬停效果（优化的版本）
+    const buttons = document.querySelectorAll('button');
+    buttons.forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        if (cursor.value) {
+          cursor.value.style.transform = 'translate(-50%, -50%) scale(2.5)';
+          cursor.value.style.background = 'radial-gradient(circle, #22c55e 0%, #4ade80 70%)';
+          cursor.value.style.boxShadow = '0 0 25px rgba(74, 222, 128, 1), 0 0 50px rgba(74, 222, 128, 0.7)';
+        }
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        if (cursor.value) {
+          cursor.value.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursor.value.style.background = '#4ade80';
+          cursor.value.style.boxShadow = '';
+        }
+      });
+    });
+    
+    // 为卡片元素添加悬停效果
+    const cards = document.querySelectorAll('.cursor-pointer');
+    cards.forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        if (cursor.value) {
+          cursor.value.style.transform = 'translate(-50%, -50%) scale(1.8)';
+          cursor.value.style.background = 'radial-gradient(circle, #10b981 0%, #22c55e 70%)';
+        }
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        if (cursor.value) {
+          cursor.value.style.transform = 'translate(-50%, -50%) scale(1)';
+          cursor.value.style.background = '#4ade80';
+        }
+      });
+    });
+  });
+  
+  onUnmounted(() => {
+    document.removeEventListener('mousemove', updateCursor);
+    if (animationId) {
+      cancelAnimationFrame(animationId);
+    }
+  });
 </script>
 
 <style scoped>
@@ -831,4 +1512,254 @@
   .animate-pulse {
     animation: pulse 2s infinite;
   }
+  
+  /* 动态交互样式 */
+  
+  /* 粒子动画 */
+  .particle {
+    animation: float linear infinite;
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(100vh) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.2;
+    }
+    90% {
+      opacity: 0.2;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(100px);
+      opacity: 0;
+    }
+  }
+  
+
+  
+  /* 滚动进入动画 */
+  .animate-on-scroll {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease-out;
+  }
+  
+  .animate-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .fadeInUp {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+  
+  .fadeInLeft {
+    animation: fadeInLeft 0.8s ease-out forwards;
+  }
+  
+  .fadeInRight {
+    animation: fadeInRight 0.8s ease-out forwards;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  /* 增强悬停效果 */
+  .hover\:shadow-green-400\/30:hover {
+    box-shadow: 0 25px 50px -12px rgba(74, 222, 128, 0.3);
+  }
+  
+  /* 自定义滚动条 */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #1f2937;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #4ade80;
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #22c55e;
+  }
+  
+  /* 图片加载动画 */
+  img {
+    transition: all 0.3s ease;
+  }
+  
+  img:hover {
+    filter: brightness(1.1) contrast(1.1);
+  }
+  
+  /* 按钮增强效果 */
+  button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(74, 222, 128, 0.3);
+    transition: width 0.6s, height 0.6s;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+  }
+  
+  button:hover::before {
+    width: 300px;
+    height: 300px;
+  }
+  
+  button > * {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* 丝滑粒子光标样式 */
+  .smooth-cursor {
+    box-shadow: 
+      0 0 15px rgba(74, 222, 128, 1),
+      0 0 30px rgba(74, 222, 128, 0.8),
+      0 0 45px rgba(74, 222, 128, 0.5),
+      0 0 60px rgba(74, 222, 128, 0.3);
+    animation: smooth-pulse 3s ease-in-out infinite alternate;
+    transition: all 0.1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform, filter;
+  }
+  
+  @keyframes smooth-pulse {
+    0% {
+      box-shadow: 
+        0 0 15px rgba(74, 222, 128, 1),
+        0 0 30px rgba(74, 222, 128, 0.8),
+        0 0 45px rgba(74, 222, 128, 0.5);
+    }
+    100% {
+      box-shadow: 
+        0 0 20px rgba(74, 222, 128, 1),
+        0 0 40px rgba(74, 222, 128, 0.9),
+        0 0 60px rgba(74, 222, 128, 0.7),
+        0 0 80px rgba(74, 222, 128, 0.4);
+    }
+  }
+  
+  .smooth-trail {
+    box-shadow: 
+      0 0 10px rgba(74, 222, 128, 0.7),
+      0 0 20px rgba(74, 222, 128, 0.5);
+    transition: none;
+    will-change: transform, left, top, opacity, filter;
+    animation: trail-glow 2s ease-in-out infinite alternate;
+  }
+  
+  @keyframes trail-glow {
+    0% {
+      box-shadow: 
+        0 0 8px rgba(74, 222, 128, 0.6),
+        0 0 16px rgba(74, 222, 128, 0.4);
+    }
+    100% {
+      box-shadow: 
+        0 0 12px rgba(74, 222, 128, 0.8),
+        0 0 24px rgba(74, 222, 128, 0.6);
+    }
+  }
+  
+  /* 飘散光斑粒子（细腻版本） */
+  .sparkle-particle {
+    box-shadow: 
+      0 0 2px rgba(74, 222, 128, 0.4),
+      0 0 4px rgba(74, 222, 128, 0.2);
+    will-change: transform, opacity, filter;
+    animation: none; /* 移除默认动画，减少干扰 */
+    transition: none;
+  }
+  
+  /* 轻微的闪烁效果，仅在必要时使用 */
+  @keyframes subtle-twinkle {
+    0% {
+      opacity: 0.1;
+      transform: translate(-50%, -50%) scale(0.5);
+    }
+    100% {
+      opacity: 0.3;
+      transform: translate(-50%, -50%) scale(0.8);
+    }
+  }
+  
+  /* 运动模糊效果优化 */
+  .smooth-cursor,
+  .smooth-trail,
+  .sparkle-particle {
+    backface-visibility: hidden;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+  }
+  
+  /* 性能优化 */
+  @media (prefers-reduced-motion: reduce) {
+    .smooth-cursor,
+    .smooth-trail,
+    .sparkle-particle {
+      animation: none;
+      transition: none;
+    }
+  }
+  
+  /* 高DPI屏幕优化 */
+  @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .smooth-cursor {
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 222, 128, 1) 0%, rgba(74, 222, 128, 0.8) 50%, rgba(74, 222, 128, 0.3) 100%);
+    }
+    
+    .smooth-trail {
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(74, 222, 128, 0.9) 0%, rgba(74, 222, 128, 0.6) 60%, rgba(74, 222, 128, 0.2) 100%);
+    }
+  }
 </style>
+
